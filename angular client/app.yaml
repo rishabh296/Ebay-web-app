@@ -1,0 +1,9 @@
+runtime: python37
+handlers:
+- url: /
+  static_files: dist/ang-hw8/index.html
+  upload: dist/ang-hw8/index.html
+- url: /
+  static_dir: dist/ang-hw8
+- url: /assets
+  static_dir: dist/ang-hw8/assets/

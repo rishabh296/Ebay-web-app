@@ -1,0 +1,133 @@
+<div class="container-fluid">
+    <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12" style="padding: 0;"> 
+        <div class="row justify-content-md-center" style="text-align: center;">
+            <div class="col-md-4">
+                <img class="img-fluid" style="padding-top: 1rem;" src="./assets/ebayHome.png">
+            </div>
+        </div>
+        <form action="" class="form-horizontal" [formGroup]="userForm" (ngSubmit)="onSubmit()"> 
+            <div class="form-group row"> 
+                <label class="col-form-label col-md-2 col-12 pr-md-0 font-weight-bold" for="key">Key words<span style="color: red;">*</span></label> 
+                <div class="col-md-10">
+                    <input class="form-control mdb-autocomplete" formControlName="key" type="text" id="key" placeholder="Enter keywords" required autocomplete="on"> 
+                </div>
+            </div>
+            <div class="form-group row" [ngClass]="{ 'has-error': invalidRange() }"> 
+                <label class="col-form-label col-md-2 col-12 pr-md-0" style="text-align: left;" for="price1"><b>Price range</b></label> 
+                <div class="col-md-5 col-6">
+                    <input class="form-control" formControlName="price1" type="number" step=any id="price1" placeholder="Min Price"> 
+                </div>
+                <div class="col-md-5 col-6">
+                <input class="form-control" formControlName="price2" type="number" step=any id="price2" placeholder="Max Price"> 
+            </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-check-label col-md-2 col-12 pr-md-0" style="text-align: left; margin: 0;" for="cond"><b>Condition</b></label> 
+                <span class="col-md-10 col-12">    
+                    <span class="form-check-inline"><input style="margin-right: 0.2rem;" class="form-check-input" formControlName="new" type="checkbox" id="new" name="cond"><label class="form-check-label"><b>New</b></label></span>
+                    <span class="form-check-inline"><input style="margin-right: 0.2rem;" class="form-check-input" formControlName="used" type="checkbox" id="used" name="cond"><label class="form-check-label"><b>Used</b></label></span>
+                    <span class="form-check-inline"><input style="margin-right: 0.2rem;" class="form-check-input" formControlName="vgood" type="checkbox" id="vgood" name="cond"><label class="form-check-label"><b>Very Good</b></label></span>
+                    <span class="form-check-inline"><input style="margin-right: 0.2rem;" class="form-check-input" formControlName="good" type="checkbox" id="good" name="cond"><label class="form-check-label"><b>Good</b></label></span>
+                    <span class="form-check-inline"><input style="margin-right: 0.2rem;" class="form-check-input" formControlName="acceptable" type="checkbox" id="acceptable" name="cond"><label class="form-check-label"><b>Acceptable</b></label></span>
+                </span>
+            </div> 
+            <div class="form-group row"> 
+                <label class="form-check-label col-md-2 col-12 pr-md-0" style="text-align: left;; margin: 0" for="seller"><b>Seller</b></label> 
+                <div class="col-md-10 col-12"><span class="form-check-inline">
+                    <input style="margin-right: 0.2rem;" class="form-check-input" formControlName="seller" type="checkbox" id="seller"><label class="form-check-label"><b>Return Accepted</b></label>
+                </span></div>
+            </div>
+            <div class="form-group row"> 
+                <label class="form-check-label col-md-2 col-12 pr-md-0" style="text-align: left;; margin: 0" for="free"><b>Shipping</b></label> 
+                <div class="col-md-10 col-12">
+                    <span class="form-check-inline"><input style="margin-right: 0.2rem;" class="form-check-input" formControlName="free" type="checkbox" id="free"><label class="form-check-label"><b>Free</b></label></span>
+                    <span class="form-check-inline"><input style="margin-right: 0.2rem;" class="form-check-input" formControlName="expedited" type="checkbox" id="expedited">   <label class="form-check-label"><b>Expedited</b></label></span>
+                </div>
+            </div>
+            <div class="form-group row"> 
+                <label class="col-form-label col-md-2 col-12 pr-md-0" style="text-align: left;" for="sort"><b>Sort Order</b></label> 
+                <div class="col-md-10 col-12">
+                    <select id="sort" class="browser-default custom-select form-control" (change)="selectedOption = $event.target.value">
+                        <option value="best">BestMatch</option>
+                        <option value="phigh">CurrentPriceHighest</option>
+                        <option value="pshigh">PricePlusShippingHighest</option>
+                        <option value="pslow">PricePlusShippingLowest</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mx-auto" style="text-align: right;">
+                <button type="submit" id='submit' class="btn btn-primary align-bottom mr-1" style="background-color: #2270bd;"><img style="filter: brightness(0) invert(1);" src="assets/search-24px.svg">Search</button>
+                <button type="reset"  (click)='clear()' id='clear' class="btn btn-secondary ml-1"><img style="filter: brightness(0) invert(1);" src="assets/clear_all-24px.svg">Clear</button>
+            </div>
+            <div style="margin-top: 5rem; text-align: center;">
+                <div *ngIf="invalid_key" class="alert alert-warning col-12" id="key_error" role='alert'>Please enter a keyword</div>
+                <div *ngIf="invalid_range" class="alert alert-warning" id="key_error" role='alert'>Please use appropriate values for minPrice/maxPrice</div>
+                <div *ngIf="noResult" class="alert alert-warning" id="key_error" role='alert'>No exact matches found</div>
+            </div>
+        </form>
+</div>
+</div>
+
+<div *ngIf="!invalid_range && !invalid_key && showResults && !noResult" class="col-lg-8 offset-lg-2 col-12 col-md-10 offset-md-1">
+    <div class="row" style="margin-top: 8%; margin-left:auto; margin-right:auto">
+        <div class="justify-content-start" style="padding-right: 0;"><h4>Results for {{ resultsFor }}</h4></div>
+        <div class="d-flex ml-auto notMobile" style="padding-left: 0; margin-right: 5%; font-weight: bold;font-size: 0.7 !important;"><pagination-controls style="float: left;" class="notMobile" (pageChange)="pageChanged($event)" maxSize="10"></pagination-controls></div>
+        <div class="d-flex ml-auto col-12 mobile" style="font-weight: bold; padding-left: 0; justify-content: center;"><pagination-controls class="mobile" (pageChange)="pageChanged($event)" maxSize="5"></pagination-controls></div>
+        <div class="d-flex ml-auto ipad" style="font-weight: bold; padding-left: 0;"><pagination-controls class="ipad" (pageChange)="pageChanged($event)" maxSize="5"></pagination-controls></div>
+    </div>
+    <div  class="card col-12" *ngFor="let item of items | paginate: config;  let i = index" style="padding: 0;">
+        <div class="row col-12" style="background-color: #c6c6c6; margin: 0; padding: 0;">
+            <div class="col-md-2 col-12 image_pad" style="text-align: center;">
+                <img *ngIf="item.url=='https://thumbs1.ebaystatic.com/pict/04040_0.jpg' || item.url=='' || !item.url" class="img-thumbnail" style="mix-blend-mode: multiply; border:0; padding:0; max-height: 8rem;" src="./assets/ebayDefault.png">
+                <img *ngIf="item.url!='https://thumbs1.ebaystatic.com/pict/04040_0.jpg'" class="img-thumbnail" style="border:0; padding:0; max-height: 8rem;" src="{{ item.url }}">
+            </div>
+            <div class="col-md-10 col-12">
+                <div class="card-body" style="padding:0.8rem; padding-left: 0; padding-right: 0;">
+                    <a href="{{ item.prod_link }}" target="_blank">
+                        <p class="card-title" style="font-weight: 500; font-size: 1.1rem;">{{ item.title }}</p>
+                    </a>
+                    <p class="card-text" style='font-size: 1rem;'><b>Price:</b> ${{ item.price }}</p>
+                    <p class="card-text" style='font-size: 1rem;'><i>{{ item.ships_from }}</i>
+                        <button *ngIf='!items[i].flag' type="button" (click)='details($event)' [id]="i" class="btn btn-light" style="margin-left: 0.5rem;">Show Details</button>
+                        <button *ngIf='items[i].flag' type="button" (click)='details($event)' [id]="i" class="btn btn-light" style="margin-left: 0.5rem;">Hide Details</button></p>
+                    <div class="container-fluid col-12 mx-auto" [id]="'info_'+i" *ngIf='items[i].flag' style="padding: 0;">
+                        <mat-tab-group animationDuration="0ms">
+                            <mat-tab label="Basic Info">
+                                <table class="table table-responsive table-borderless" style="margin-bottom: 0;">
+                                    <tr><th style="padding: 0.6rem;">Category Name</th><td style="padding: 0.6rem;">{{ item.categ }}</td></tr>
+                                    <tr><th style="padding: 0.6rem; padding-bottom: 0;">Condition</th><td style="padding: 0.6rem; padding-bottom: 0;">{{ item.condition }}</td></tr>
+                                </table>
+                            </mat-tab>
+                            <mat-tab label="Shipping Info">
+                                <table class="table table-responsive table-borderless" style="margin-bottom: 0;">
+                                    <tr><th style="padding: 0.6rem;">ShippingType</th><td style="padding: 0.6rem;">{{ item.ship_type }}</td></tr>
+                                    <tr><th style="padding: 0.6rem;">Shipping cost</th><td style="padding: 0.6rem;">{{ item.shipping }}</td></tr>
+                                    <tr><th style="padding: 0.6rem;">Shiptolocations</th><td style="padding: 0.6rem;">{{ item.shipToLoc }}</td></tr>
+                                    <tr *ngIf='item.exp_ship'><th style="padding: 0.6rem;">ExpeditedShipping</th><td style="padding: 0.6rem;"><img src="./assets/done-24px.svg" class="filter-green"></td></tr>
+                                    <tr *ngIf='!item.exp_ship'><th style="padding: 0.6rem;">ExpeditedShipping</th><td style="padding: 0.6rem;"><img src="./assets/clear-24px.svg" class="filter-red"></td></tr>
+                                    <tr *ngIf='item.oneDay'><th style="padding: 0.6rem;">OneDayShippingAvailable</th><td style="padding: 0.6rem;"><img src="./assets/done-24px.svg" class="filter-green"></td></tr>
+                                    <tr *ngIf='!item.oneDay'><th  style="padding: 0.6rem; padding-bottom: 0;">OneDayShippingAvailable</th><td  style="padding: 0.6rem; padding-bottom: 0;"><img src="./assets/clear-24px.svg" class="filter-red"></td></tr>
+                                </table>
+                            </mat-tab>
+                            <mat-tab label="Listing Info">
+                                <table class="table table-responsive table-borderless" style="margin-bottom: 0;">
+                                    <tr *ngIf='item.bestOffer'><th style="padding: 0.6rem;">BestOfferEnabled</th><td style="padding: 0.6rem; padding-left: 0;"><img src="./assets/done-24px.svg" class="filter-green"></td></tr>
+                                    <tr *ngIf='!item.bestOffer'><th style="padding: 0.6rem;">BestOfferEnabled</th><td style="padding: 0.6rem; padding-left: 0;"><img src="./assets/clear-24px.svg" class="filter-red"></td></tr>
+                                    <tr *ngIf='item.buyItNow'><th style="padding: 0.6rem;">BuyItNowAvailable</th><td style="padding: 0.6rem; padding-left: 0;"><img src="./assets/done-24px.svg" class="filter-green"></td></tr>
+                                    <tr *ngIf='!item.buyItNow'><th style="padding: 0.6rem;">BuyItNowAvailable</th><td style="padding: 0.6rem; padding-left: 0;"><img src="./assets/clear-24px.svg" class="filter-red"></td></tr>
+                                    <!-- <tr><th>BestOfferEnabled</th><td>{{ item.bestOffer }}</td></tr>
+                                    <tr><th>BuyItNowAvailable</th><td>{{ item.buyItNow }}</td></tr> -->
+                                    <tr><th style="padding: 0.6rem;">ListingType</th><td style="padding: 0.6rem; padding-left: 0;">{{ item.listingType }}</td></tr>
+                                    <tr *ngIf='item.gift'><th style="padding: 0.6rem;">Gift</th><td style="padding: 0.6rem; padding-left: 0;"><img src="./assets/done-24px.svg" class="filter-green"></td></tr>
+                                    <tr *ngIf='!item.gift'><th style="padding: 0.6rem;">Gift</th><td style="padding: 0.6rem; padding-left: 0;"><img src="./assets/clear-24px.svg" class="filter-red"></td></tr>
+                                    <!-- <tr><th>Gift</th><td>{{ item.gift }}</td></tr> -->
+                                    <tr><th  style="padding: 0.6rem; padding-bottom: 0;">WatchCount</th><td  style="padding: 0.6rem; padding-left: 0; padding-bottom: 0;">{{ item.watchCount }}</td></tr>
+                                </table>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
