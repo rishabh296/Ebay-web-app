@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Homework 6</title>
+        <script defer src="validator.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+    <form id='form' onsubmit="" action="#" style="align-items: center; align-content: center;">
+        <span style="display: flex; justify-content: center;"><a href="https://www.ebay.com/" target="_blank" style="width: 150px; height: 75px;"><img src="eBayLogo.png" style="width: 100%;height: 100%;"></a><h1 style="font-size: 34px;">Shopping</h1></span>
+        <table border=1 class="tabular">
+            <tr><td><b>Key Words<span style="color: red;">*</span>: </b> <input type="text" id='key' name='key' required autocomplete="on" style="width: 165px;"></td></tr>
+            <tr><td><b>Price Range:</b>&nbsp; From &nbsp;<input type="number" id='price1' name='price1' step=any style="width: 10%;">&nbsp; to &nbsp;<input type="number" id='price2' name='price2' step=any style="width: 10%;"></td></tr>
+            <tr><td><b>Condition:</b> <input type="checkbox" id='new' name='new'> New <input type="checkbox" id='used' name='used'> Used <input type="checkbox" id='vgood' name='vgood'> Very Good <input type="checkbox" id='good' name='good'> Good <input type="checkbox" id='acceptable' name='acceptable'> Acceptable</td></tr>
+            <tr><td><b>Seller:</b> <input type="checkbox" id='seller' name='seller'> Return Accepted</td></tr>
+            <tr><td><b>Shipping:</b> <input type="checkbox" id='free' name='free'> Free <input type="checkbox" id='expedited' name='expedited'> Expedited</td></tr>
+            <tr><td><b>Sort by:</b> <select name="sort" id="sort" style="text-align-last: center;">
+                <option value="best">Best Match</option>
+                <option value="phigh">Price: highest first</option>
+                <option value="pshigh">Price + Shipping: highest first</option>
+                <option value="pslow">Price + Shipping: lowest first</option>
+              </select></td></tr>
+            <tr><td><button type="reset">Clear</button> <button type="submit">Search</button></td></tr>
+        </table>
+    </form>
+    <div id = 'container'>
+    </div>
+    </body>
+</html>

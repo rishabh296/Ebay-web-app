@@ -1,0 +1,160 @@
+
+html {
+  scroll-behavior: smooth;
+  font-style: normal;
+}
+body{
+  font-style: normal;
+}
+
+.tabular{
+  border-collapse: collapse;
+  text-align: center;
+  /* font-size: 16px; */
+  margin: auto;
+  height: 275px;
+  width: 500px;
+  border: 1px solid black; 
+}
+
+button{
+  border-radius: 4px;
+  box-shadow: none;
+  border:none;
+  padding: 5px;
+  margin: 0;
+  background-color: #dfdfdf;
+}
+
+.card_spacing{
+  padding: 0;
+  margin: 0;
+  padding-top: 2%;
+  padding-bottom: 1%;
+}
+
+.elipse{
+  white-space: nowrap; 
+  width: 95%; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+td{
+  padding: 5px;
+}
+input[type=number] {
+    width: 15%;
+}
+input[type=text] {
+  width: 30%;
+}
+
+a.redir{
+  opacity: 0.5;
+  transition: 0.5 ease;
+}
+a.redir:hover{
+  opacity: 1;
+}
+
+button:hover{
+  background-color:#50af50;
+  color:white;
+}
+.productBox{
+  display: flex;
+  border: black 2px solid;
+  border-width: thin;
+  width: 692px;
+  margin: auto;
+  background-color: #f3f3f3;
+  height: auto;
+  margin-top: 0.3%;
+  /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+  border-radius: 4px;
+  padding-left: 8px;
+}
+
+.imageBox{
+  /* width: 150px; */
+  width: 25%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.productImage{
+  max-width: 148px;
+  max-height: 100px;
+  min-width: 70px;
+  margin: 5%;
+  float:left;
+  border: thin solid;
+  border-width: medium;
+  border-color: #b1aeae;
+}
+img[class="productImage"]:hover{
+  transform: scale(2);
+  transition: all .5s ease-in-out;
+}
+div[class="productBox"]:hover{
+  transition: 0.1s;
+  box-shadow: 0 4px 8px 4px rgba(0,0,0,0.2);
+}
+
+/* div[class="productBox"] div p{
+  margin: 0;
+  margin-top: auto;
+  margin-left: 6%;
+} */
+
+.close{
+  color: red; 
+  margin: 0; 
+  padding:0;
+  /* padding-top: 0.3%; */
+  padding-right: 3.5%;
+  float: right;
+  cursor: pointer;
+}
+
+.close_box{
+  margin: 0;
+  float: right;
+}
+
+hr{
+  width: 700px;
+  margin: auto;
+  margin-bottom: 1%;
+}
+
+.total{
+  text-align: center; 
+  margin: 1.2%;
+}
+
+.show_more{
+  display: flex; 
+  justify-content: center;
+  padding: 2px;
+  margin: 0;
+}
+
+.show_button{
+  display: block;
+  width: 85px;
+  height: 30px;
+  margin: auto;
+}
+
+.card_content{
+  /* margin-left: 1px; */
+  width: 75%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
