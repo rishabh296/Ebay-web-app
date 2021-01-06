@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@angular/cli": "^9.1.8",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "express": "^4.17.1",
     "http": "0.0.1-security",
     "https": "^1.0.0",
